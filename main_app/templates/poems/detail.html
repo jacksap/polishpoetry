@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>{{ poem.name }}</h1>
+
+<div class='biocard'>
+    <h3>{{ poem.poet}}</h3> 
+    <pre>{{ poem.poemcontent }}</pre>
+    <p>{{ poem.date }}</p>
+    <p>Source: {{ poem.source }}</p>
+</div>
+
+{% endblock %}
