@@ -17,4 +17,7 @@ urlpatterns = [
     path('poems/create/', views.PoemCreate.as_view(), name='poems_create'),
     path('poems/<int:pk>/update/', views.PoemUpdate.as_view(), name='poems_update'),
     path('poems/<int:pk>/delete/', views.PoemDelete.as_view(), name='poems_delete'),
+    path('poems/<int:poem_id>/add_comment/', views.add_comment, name='add_comment'),
+    path('comments/<int:pk>/update/', views.CommentUpdate.as_view(), name='comment_update'),
+    path('comments/<int:pk>/delete/', views.CommentDelete.as_view(), name='comment_delete'),
 ]

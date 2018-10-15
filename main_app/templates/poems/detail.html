@@ -16,4 +16,19 @@
     <p>Source: {{ poem.source }}</p>
 </div>
 </div>
+<div>
+    {% for comment in poem.comment_set.all %}
+        <tr>
+            <td>{{comment.user}}</td> : 
+            <td>{{comment.content}}</td>
+            <a href="{% url 'comment_update' comment.id %}">Edit</a>
+            <a href="{% url 'comment_delete' comment.id %}">Delete</a>
+        </tr>
+    {% endfor %}
+    <form action="{% url 'add_comment' poem.id %}" method="POST">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <input type="submit" class="btn" value="Comment">
+     </form>
+</div>
 {% endblock %}

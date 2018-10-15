@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from .forms import LoginForm
+from .forms import LoginForm, CommentForm
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Poet, Poem
+from .models import Poet, Poem, Comment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -21,8 +21,12 @@ class PoetCreate(CreateView):
         return HttpResponseRedirect('/poets/')
 
 class PoetUpdate(UpdateView):
-  model = Poet
-  fields = '__all__'
+    model = Poet
+    fields = '__all__'
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        return HttpResponseRedirect('/poets/' + str(self.object.pk))
 
 @method_decorator(login_required, name='dispatch')
 class PoetDelete(DeleteView):
@@ -42,11 +46,32 @@ class PoemCreate(CreateView):
 class PoemUpdate(UpdateView):
   model = Poem
   fields = '__all__'
+  def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        return HttpResponseRedirect('/poems/' + str(self.object.pk))
 
 @method_decorator(login_required, name='dispatch')
 class PoemDelete(DeleteView):
   model = Poem
   success_url = '/poems'
+
+class CommentUpdate(UpdateView):
+    model = Comment
+    fields = ['content']
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        return redirect(f"/poems/{self.object.poem_id}")
+
+class CommentDelete(DeleteView):
+   model = Comment
+   def post(self, request, *args, **kwargs):
+       comment = self.get_object()
+       poem_id = comment.poem_id
+       comment.delete()
+       return redirect(f"/poems/{poem_id}")
 
 # Create your views here.
 
@@ -107,4 +132,15 @@ def poems_index(request):
 
 def poems_detail(request, poem_id):
     poem = Poem.objects.get(id=poem_id)
-    return render(request, 'poems/detail.html', {'poem':poem})
+    comment_form = CommentForm()
+    return render(request, 'poems/detail.html', {
+    	'poem': poem, 'comment_form': comment_form
+    })
+
+def add_comment(request, poem_id):
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        new_comment = form.save(commit=False)
+        new_comment.poem_id = poem_id
+        new_comment.save()
+    return redirect('poems_detail', poem_id=poem_id)
