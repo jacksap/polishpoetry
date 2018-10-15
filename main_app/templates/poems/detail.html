@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>{{ poem.name }}</h1>
+<div><h1>{{ poem.name }}</h1>
 
+    <a href="{% url 'poems_update' poem.id %}">Edit</a>
+    <a href="{% url 'poems_delete' poem.id %}">Delete</a>
 <div>
     <h3>BY: {{ poem.poet}}</h3> 
     <br>
-    <pre>{{ poem.poemcontent }}</pre>
+    <p>
+        <pre>{{ poem.poemcontent }}</pre>
+    </p>
     <br>
     <p>{{ poem.date }}</p>
     <p>Source: {{ poem.source }}</p>
 </div>
-
+</div>
 {% endblock %}

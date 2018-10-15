@@ -9,7 +9,7 @@ class Poet(models.Model):
     name = models.CharField(max_length=100)
     born = models.DateField('Birth Date')
     died = models.DateField('Death Date')
-    biography = models.TextField(max_length=500)
+    biography = models.TextField(max_length=1000)
     period = models.CharField(max_length=100)
     
     def __str__(self):
@@ -24,3 +24,12 @@ class Poem(models.Model):
 
     def __str__(self):
         return self.name
+
+class Comment(models.Model):
+    content = models.TextField('Comment', max_length=1000)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    poem = models.ForeignKey(Poem, on_delete=models.CASCADE)
+
+
+
+

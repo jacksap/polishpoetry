@@ -2,12 +2,14 @@
 {% block content %}
 
 <h1>Poets</h1>
+<a href="/poets/create">Add a New Poet!</a>
 
-<div class='poetcard'>
 {% for poet in poets %}
-    <h3><a href="{% url 'poets_detail' poet.id %}">{{ poet.name }}</a></h3>
-{% endfor %}
+<a href="{% url 'poets_detail' poet.id %}">
+<div class='poetcard'>
+        <h3>{{ poet.name }}</h3>
 </div>
+</a>
+{% endfor %}
 
 {% endblock %}
-

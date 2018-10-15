@@ -2,8 +2,51 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Poet, Poem
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+# Class-Based Views
+
+class PoetCreate(CreateView):
+    model = Poet
+    fields = '__all__'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect('/poets/')
+
+class PoetUpdate(UpdateView):
+  model = Poet
+  fields = '__all__'
+
+@method_decorator(login_required, name='dispatch')
+class PoetDelete(DeleteView):
+  model = Poet
+  success_url = '/poets'
+
+class PoemCreate(CreateView):
+    model = Poem
+    fields = '__all__'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect('/poems/')
+
+class PoemUpdate(UpdateView):
+  model = Poem
+  fields = '__all__'
+
+@method_decorator(login_required, name='dispatch')
+class PoemDelete(DeleteView):
+  model = Poem
+  success_url = '/poems'
 
 # Create your views here.
 

@@ -8,5 +8,14 @@
     <p>{{ poet.biography }}</p>
     <p>{{ poet.period }} Poetry</p>
 </div>
+    <a href="{% url 'poets_update' poet.id %}">Edit</a>
+    <a href="{% url 'poets_delete' poet.id %}">Delete</a>
+</div>
+<div>
+    {% for poem in poet.poems.all %}
+        <a class='poetworks' href="{% url 'poems_detail' poem.id %}">{{poem.name}}</a>
+    {% empty %}
+        <a href="/poems/create">Add to their Poetry works.</a>
+    {% endfor %}
 </div>
 {% endblock %}
