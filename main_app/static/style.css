@@ -90,3 +90,7 @@ header {
 .bio {
 border-left: 6px solid green;
 }
+pre {
+    font-family: Arial, sans-serif;
+    font-style: normal;
+}

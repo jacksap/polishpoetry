@@ -17,7 +17,7 @@ class Poet(models.Model):
 
 class Poem(models.Model):
     name = models.CharField(max_length=100)
-    poemcontent = models.TextField(max_length=5000)
+    poemcontent = models.TextField('Poem', max_length=5000)
     date = models.DateField('Date Written')
     source = models.CharField(max_length=500)
     poet = models.ForeignKey(Poet, on_delete=models.CASCADE)

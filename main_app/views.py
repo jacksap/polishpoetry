@@ -10,6 +10,7 @@ from django.utils.decorators import method_decorator
 
 # Class-Based Views
 
+@method_decorator(login_required, name='dispatch')
 class PoetCreate(CreateView):
     model = Poet
     fields = '__all__'
@@ -20,6 +21,7 @@ class PoetCreate(CreateView):
         self.object.save()
         return HttpResponseRedirect('/poets/')
 
+@method_decorator(login_required, name='dispatch')
 class PoetUpdate(UpdateView):
     model = Poet
     fields = '__all__'
@@ -33,6 +35,7 @@ class PoetDelete(DeleteView):
   model = Poet
   success_url = '/poets'
 
+@method_decorator(login_required, name='dispatch')
 class PoemCreate(CreateView):
     model = Poem
     fields = '__all__'
@@ -43,6 +46,7 @@ class PoemCreate(CreateView):
         self.object.save()
         return HttpResponseRedirect('/poems/')
 
+@method_decorator(login_required, name='dispatch')
 class PoemUpdate(UpdateView):
   model = Poem
   fields = '__all__'
@@ -56,6 +60,7 @@ class PoemDelete(DeleteView):
   model = Poem
   success_url = '/poems'
 
+@method_decorator(login_required, name='dispatch')
 class CommentUpdate(UpdateView):
     model = Comment
     fields = ['content']
@@ -65,6 +70,7 @@ class CommentUpdate(UpdateView):
         self.object.save()
         return redirect(f"/poems/{self.object.poem_id}")
 
+@method_decorator(login_required, name='dispatch')
 class CommentDelete(DeleteView):
    model = Comment
    def post(self, request, *args, **kwargs):
@@ -137,6 +143,7 @@ def poems_detail(request, poem_id):
     	'poem': poem, 'comment_form': comment_form
     })
 
+@method_decorator(login_required, name='dispatch')
 def add_comment(request, poem_id):
     form = CommentForm(request.POST)
     if form.is_valid():
