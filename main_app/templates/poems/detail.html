@@ -3,9 +3,11 @@
 
 <h1>{{ poem.name }}</h1>
 
-<div class='biocard'>
-    <h3>{{ poem.poet}}</h3> 
+<div>
+    <h3>BY: {{ poem.poet}}</h3> 
+    <br>
     <pre>{{ poem.poemcontent }}</pre>
+    <br>
     <p>{{ poem.date }}</p>
     <p>Source: {{ poem.source }}</p>
 </div>

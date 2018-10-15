@@ -16,7 +16,7 @@ nav {
 .tabs a {
     color: #fe0000;
     text-decoration: none;
-    font-size: 30px;
+    font-size: 25px;
     padding: 10px 40px;
     float: right;
 }
@@ -87,4 +87,7 @@ header {
 }
 .biocard {
     width: 400px;
+}
+.bio {
+border-left: 6px solid green;
 }
