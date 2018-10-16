@@ -8,4 +8,4 @@ class LoginForm(Form):
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ['content','user']
+        fields = ['content']

@@ -7,10 +7,10 @@ from django.contrib.auth.models import User
 
 class Poet(models.Model):
     name = models.CharField(max_length=100)
-    born = models.DateField('Birth Date')
-    died = models.DateField('Death Date')
+    born = models.CharField('Birth Date', max_length=100)
+    died = models.CharField('Death Date', max_length=100)
     biography = models.TextField(max_length=1000)
-    period = models.CharField(max_length=100)
+    period = models.CharField('Period(s)', max_length=100)
     
     def __str__(self):
         return self.name
@@ -18,7 +18,7 @@ class Poet(models.Model):
 class Poem(models.Model):
     name = models.CharField(max_length=100)
     poemcontent = models.TextField('Poem', max_length=5000)
-    date = models.DateField('Date Written')
+    date = models.CharField('Written', max_length=100)
     source = models.CharField(max_length=500)
     poet = models.ForeignKey(Poet, on_delete=models.CASCADE)
 

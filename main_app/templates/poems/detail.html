@@ -18,12 +18,12 @@
 </div>
 <div>
     {% for comment in poem.comment_set.all %}
-        <tr>
-            <td>{{comment.user}}</td> : 
-            <td>{{comment.content}}</td>
+        <div>
+            <p>{{comment.user}}</p> : 
+            <p>{{comment.content}}</p>
             <a href="{% url 'comment_update' comment.id %}">Edit</a>
             <a href="{% url 'comment_delete' comment.id %}">Delete</a>
-        </tr>
+        </div>
     {% endfor %}
     <form action="{% url 'add_comment' poem.id %}" method="POST">
             {% csrf_token %}

@@ -143,11 +143,12 @@ def poems_detail(request, poem_id):
     	'poem': poem, 'comment_form': comment_form
     })
 
-@method_decorator(login_required, name='dispatch')
+@login_required
 def add_comment(request, poem_id):
     form = CommentForm(request.POST)
     if form.is_valid():
         new_comment = form.save(commit=False)
+        new_comment.user = request.user
         new_comment.poem_id = poem_id
         new_comment.save()
     return redirect('poems_detail', poem_id=poem_id)
