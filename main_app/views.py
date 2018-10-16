@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from .forms import LoginForm, CommentForm
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Poet, Poem, Comment
+from .models import Poet, Poem, Comment, Collection
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -79,6 +79,18 @@ class CommentDelete(DeleteView):
        comment.delete()
        return redirect(f"/poems/{poem_id}")
 
+class CollectionCreate(CreateView):
+    model = Collection
+    fields = '__all__'
+
+class CollectionUpdate(UpdateView):
+    model = Collection
+    fields = '__all__'
+
+class CollectionDelete(DeleteView):
+    model = Collection
+    success_url = '/collections'
+
 # Create your views here.
 
 def index(request):
@@ -152,3 +164,12 @@ def add_comment(request, poem_id):
         new_comment.poem_id = poem_id
         new_comment.save()
     return redirect('poems_detail', poem_id=poem_id)
+
+def collections_index(request):
+    collections = Collection.objects.all()
+    return render(request, 'collections/index.html', {'collections': collections})
+
+def collections_detail(request, collection_id):
+    collection = Collection.objects.get(id=collection_id)
+    return render(request, 'collections/detail.html', {
+    	'collection': collection})
