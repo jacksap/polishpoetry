@@ -10,7 +10,7 @@
     <a href="{% url 'collections_delete' collection.id %}">Delete</a>
 </div>
 <div>
-    {% for poem in collection.poems.all %}
+    {% for poem in collection.poem_set.all %}
         <a class='collectionworks' href="{% url 'poems_detail' poem.id %}">{{poem.name}}</a>
     {% empty %}
         <a href="/poems">Add to this Poetry Collection.</a>

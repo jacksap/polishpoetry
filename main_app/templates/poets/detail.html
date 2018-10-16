@@ -12,7 +12,7 @@
     <a href="{% url 'poets_delete' poet.id %}">Delete</a>
 </div>
 <div>
-    {% for poem in poet.poems.all %}
+    {% for poem in poet.poem_set.all %}
         <a class='poetworks' href="{% url 'poems_detail' poem.id %}">{{poem.name}}</a>
     {% empty %}
         <a href="/poems/create">Add to their Poetry works.</a>

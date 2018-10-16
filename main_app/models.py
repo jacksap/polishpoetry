@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from datetime import date
 from django.contrib.auth.models import User
+from django.forms import TextInput
 
 # Create your models here.
 
@@ -18,8 +19,8 @@ class Collection(models.Model):
 
 class Poet(models.Model):
     name = models.CharField(max_length=100)
-    born = models.CharField('Birth Date', max_length=100)
-    died = models.CharField('Death Date', max_length=100)
+    born = models.CharField('Birth Date', max_length=100, help_text='Month Day, Year')
+    died = models.CharField('Death Date', max_length=100, blank=True)
     biography = models.TextField(max_length=1000)
     period = models.CharField('Period(s)', max_length=100)
     
@@ -44,3 +45,5 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Commment: {self.content}'
+
+        # widget=TextInput(attrs={'placeholder':'Month Day, Year'})

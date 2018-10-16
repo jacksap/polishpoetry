@@ -1,28 +1,38 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div><h1>{{ poem.name }}</h1>
-
+<div>
+    <h1>{{ poem.name }}</h1>
     <a href="{% url 'poems_update' poem.id %}">Edit</a>
     <a href="{% url 'poems_delete' poem.id %}">Delete</a>
-<div>
-    <h3>BY: {{ poem.poet}}</h3> 
-    <br>
-    <p>
-        <pre>{{ poem.poemcontent }}</pre>
-    </p>
-    <br>
-    <p>{{ poem.date }}</p>
-    <p>Source: {{ poem.source }}</p>
+    <div>
+        <h3>BY: {{ poem.poet}}</h3> 
+        <br>
+        <p>
+            <pre>{{ poem.poemcontent }}</pre>
+        </p>
+        <br>
+        <p>{{ poem.date }}</p>
+        <p>Source: {{ poem.source }}</p>
+    </div>
 </div>
+<div>
+    {% for collection in poem.collection.all %}
+        <div >Collection: {{collection.name}}</div>
+    {% empty %}
+        <div >This poem curently doesn't belong to any collections.</div>
+    {% endfor %}
 </div>
 <div>
     {% for comment in poem.comment_set.all %}
         <div>
-            <p>{{comment.user}}</p> : 
-            <p>{{comment.content}}</p>
+            <p>{{comment.user}}: {{comment.content}}</p>
+        {% if user == comment.user %}
+        <div>
             <a href="{% url 'comment_update' comment.id %}">Edit</a>
             <a href="{% url 'comment_delete' comment.id %}">Delete</a>
+        </div>
+        {% endif %}
         </div>
     {% endfor %}
     <form action="{% url 'add_comment' poem.id %}" method="POST">

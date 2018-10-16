@@ -43,7 +43,11 @@ class PoemCreate(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
+        collection = form.cleaned_data['collection']
+        collection_list = Collection.objects.filter(pk__in=collection)
         self.object.save()
+        for collection in collection_list:
+            self.object.collection.add(collection)
         return HttpResponseRedirect('/poems/')
 
 @method_decorator(login_required, name='dispatch')
@@ -131,7 +135,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')
+            return redirect('learn')
     else:
         form = UserCreationForm()
         return render(request, 'signup.html', {'form': form})
@@ -152,7 +156,7 @@ def poems_detail(request, poem_id):
     poem = Poem.objects.get(id=poem_id)
     comment_form = CommentForm()
     return render(request, 'poems/detail.html', {
-    	'poem': poem, 'comment_form': comment_form
+    	'poem': poem, 'comment_form': comment_form,
     })
 
 @login_required
