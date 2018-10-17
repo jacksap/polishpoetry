@@ -3,9 +3,6 @@
 
 <div>
     <h1>{{ poem.name }}</h1>
-    <a href="{% url 'poems_update' poem.id %}">Edit</a>
-    <a href="{% url 'poems_delete' poem.id %}">Delete</a>
-    <div>
         <h3>BY: {{ poem.poet}}</h3> 
         <br>
         <p>
@@ -14,23 +11,29 @@
         <br>
         <p>{{ poem.date }}</p>
         <p>Source: {{ poem.source }}</p>
-    </div>
+    <a class='poemalter' href="{% url 'poems_update' poem.id %}">Edit</a>
+    <a class='poemalter' href="{% url 'poems_delete' poem.id %}">Delete</a>
 </div>
+<br>
 <div>
+    <h3>Poetry Collections:</h3>
     {% for collection in poem.collection.all %}
-        <div >Collection: {{collection.name}}</div>
+        <li><a class='poeminfo' href="{% url 'collections_detail' collection.id %}">{{collection.name}}</a></li>
     {% empty %}
-        <div >This poem curently doesn't belong to any collections.</div>
+        <div>This poem curently doesn't belong to any collections.</div>
     {% endfor %}
+    <br>
 </div>
 <div>
+    <h3>Comments:</h3>
     {% for comment in poem.comment_set.all %}
         <div>
             <p>{{comment.user}}: {{comment.content}}</p>
+            <hr>
         {% if user == comment.user %}
         <div>
-            <a href="{% url 'comment_update' comment.id %}">Edit</a>
-            <a href="{% url 'comment_delete' comment.id %}">Delete</a>
+            <a class='poeminfo' href="{% url 'comment_update' comment.id %}">Edit</a>
+            <a class='poeminfo' href="{% url 'comment_delete' comment.id %}">Delete</a>
         </div>
         {% endif %}
         </div>
@@ -38,7 +41,7 @@
     <form action="{% url 'add_comment' poem.id %}" method="POST">
             {% csrf_token %}
             {{ comment_form.as_p }}
-            <input type="submit" class="btn" value="Comment">
+            <input type="submit" class="btn" value="SUBMIT">
      </form>
 </div>
 {% endblock %}

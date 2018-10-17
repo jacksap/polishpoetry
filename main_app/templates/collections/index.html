@@ -2,7 +2,7 @@
 {% block content %}
 
 <h1>Collections</h1>
-<a href="/collections/create">Add a New Collection!</a>
+<a class="create" href="/collections/create">Create a Collection</a>
 
 {% for collection in collections %}
 <a href="{% url 'collections_detail' collection.id %}">

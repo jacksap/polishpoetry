@@ -39,7 +39,7 @@ class Poem(models.Model):
         return self.name
 
 class Comment(models.Model):
-    content = models.TextField('Comment', max_length=500)
+    content = models.TextField('COMMENT', max_length=500)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     poem = models.ForeignKey(Poem, on_delete=models.CASCADE)
 

@@ -2,7 +2,7 @@
 {% block content %}
 
 <h1>Poems</h1>
-<a href="/poems/create">Add a New Poem!</a>
+<a class="create" href="/poems/create">Add a Poem</a>
 <div class='poemcard'>
 {% for poem in poems %}
     <h3><a href="{% url 'poems_detail' poem.id %}">{{ poem.name }}</a></h3>

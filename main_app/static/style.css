@@ -34,15 +34,16 @@ nav {
     overflow: auto;
 }
 .poetcard {
-    height: 200px;
-    width: 200px;
+    height: 250px;
+    width: 250px;
     background-color: #ffffff;
     color: #fe0000;
     font-size: 20px;
     text-decoration: none;
+    display: inline-block;
+    margin: 15px 15px 0 0;
+    text-align: center;
 }
-
-
 .tabs {
     font-weight: bold;
     margin-top: 5vh;
@@ -51,15 +52,15 @@ main{
     display: flex;
     flex-direction: column;
     background-color: #0e0e0e;
-    width: 60vw;
+    width: 70vw;
     margin: 0;
     color: #ffffff;
-    height: 88vh;
-    font-family: Arial, sans-serif;
+    font-family: 'Fira Sans', sans-serif;
     font-style: normal;
     position: relative;
     left: 300px;
     top: 80px;
+    margin-bottom: 3em;
 }
 footer{
     position: fixed;
@@ -85,11 +86,120 @@ header {
 }
 .biocard {
     width: 400px;
+    margin-left: 10px;
 }
-.bio {
-border-left: 6px solid green;
+.biocard a {
+    color: red;
+}
+#bio {
+    border-left: 3px solid lightgray;
 }
 pre {
-    font-family: Arial, sans-serif;
+    font-family: 'Fira Sans', sans-serif;
     font-style: normal;
+}
+a {
+    text-decoration: none;
+    color: #fe0000;
+}
+#img-bio {
+    display: inline-block;
+    margin-right: 10px;
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.poetbio {
+    display: flex;
+    font-family: 'Fira Sans', sans-serif;
+}
+.collectionofworks {
+    font-family: eurostile, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+}
+h1 {
+    font-family: eurostile, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 2em;
+}
+.collectionofworks h2{
+    color: #ffffff;
+    font-size: 2em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.collectionofworks a{
+    margin-top: 10px;
+    color: #fe0000;
+    font-size: 1.5em;
+}
+
+.poetworks{
+    font-family: 'Fira Sans', sans-serif;
+}
+.btn {
+    position: relative;
+    bottom: 38px;
+    left: 345px;
+}
+h3{
+    font-family: eurostile, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+label {
+    font-family: eurostile, sans-serif;
+    color: #fe0000;
+}
+hr {
+    border-color: darkgray;
+    background-color: darkgray;
+}
+.poeminfo {
+    color: #fe0000;
+}
+
+.poemalter {
+    color: #fe0000;
+    font-size: 12px;
+}
+.poetmain {
+    display: flex;
+    width: 800px;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+.create {
+    color: lightgray;
+    text-transform: uppercase;
+    font-family: eurostile, sans-serif;
+    text-decoration: underline;
+}
+.collectionworks {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 1.5em;
+}
+.collectioncard {
+    font-size: 1.5em;
+    background-color:rgba(255, 255, 255, 0.75);
+    height: 200px;
+    text-align: right;
+    margin: 10px 0;
+}
+.collectioncard h3{
+    font-size: 1.17em;
+    background-color: rgba(255, 255, 255, 0.5);
+    /* height: 200px; */
+    text-align: right;
+    padding: 10px;
+   
+}
+.poemcard h3{
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 1em;
+    text-transform: none;
 }

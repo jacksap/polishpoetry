@@ -3,17 +3,17 @@
 <div class='collection'>
 <h1>{{ collection.name }} Collection</h1>
 
-<div class='biocard'>
-    <p>{{ collection.description }}</p>
-</div>
-    <a href="{% url 'collections_update' collection.id %}">Edit</a>
-    <a href="{% url 'collections_delete' collection.id %}">Delete</a>
-</div>
 <div>
-    {% for poem in collection.poem_set.all %}
-        <a class='collectionworks' href="{% url 'poems_detail' poem.id %}">{{poem.name}}</a>
-    {% empty %}
+    <p>{{ collection.description }}</p>
+    <div>
+        {% for poem in collection.poem_set.all %}
+        <p><a class='collectionworks' href="{% url 'poems_detail' poem.id %}">{{poem.name}}</a></p>
+        {% empty %}
         <a href="/poems">Add to this Poetry Collection.</a>
-    {% endfor %}
-</div>
+        {% endfor %}
+    </div>
+    </div>
+        <a class='poemalter' href="{% url 'collections_update' collection.id %}">Edit</a>
+        <a class='poemalter' href="{% url 'collections_delete' collection.id %}">Delete</a>
+    </div>
 {% endblock %}
