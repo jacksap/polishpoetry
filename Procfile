@@ -1,0 +1,1 @@
+web: gunicorn polishpoetry.wsgi --log-file -
