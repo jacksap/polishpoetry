@@ -200,6 +200,54 @@ hr {
 }
 .poemcard h3{
     font-family: 'Fira Sans', sans-serif;
-    font-size: 1em;
+    font-size: 1.7em;
     text-transform: none;
+}
+
+img.photo {
+    max-width: 400px;
+    max-height: 500px;
+    height: auto;
+    width: auto;
+    margin-right: 10px;
+}
+
+img.coverphoto {
+    max-width: 500px;
+    max-height: 500px;
+    height: auto;
+    width: auto;
+    margin-right: 10px;
+    float: right;
+}
+.clearfix {
+    overflow: auto;
+}
+
+img.learning {
+    float:left;
+    max-width: 200px;
+    height: auto;
+    margin-right: 10px;
+}
+.clearfix {
+    overflow: auto;
+}
+.learntext {
+    max-width:800px;
+}
+.homeclick a{
+    width: 315px;
+    text-align: center;
+    font-size: 1.5em;
+}
+.homeclick {
+    display: flex;
+    justify-content: space-around;
+    
+}
+.homeclick a:hover {
+    opacity: 0.3;
+    transition: .5s ease;
+    background-color: black;
 }

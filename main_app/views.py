@@ -3,10 +3,17 @@ from django.http import HttpResponseRedirect
 from .forms import LoginForm, CommentForm
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Poet, Poem, Comment, Collection
+from .models import Poet, Poem, Comment, Collection, Photo, CoverPhoto
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+
+import uuid
+import boto3
+
+# Constants
+S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
+BUCKET = 'js-catcollector'
 
 # Class-Based Views
 
@@ -177,3 +184,39 @@ def collections_detail(request, collection_id):
     collection = Collection.objects.get(id=collection_id)
     return render(request, 'collections/detail.html', {
     	'collection': collection})
+
+def add_photo(request, poet_id):
+	# photo-file was the "name" attribute on the <input type="file">
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        # need a unique "key" for S3 / needs image file extension too
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        # just in case something goes wrong
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            # build the full url string
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = Photo(url=url, poet_id=poet_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('poets_detail', poet_id=poet_id)
+
+def add_cover_photo(request, collection_id):
+	# photo-file was the "name" attribute on the <input type="file">
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        # need a unique "key" for S3 / needs image file extension too
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        # just in case something goes wrong
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            # build the full url string
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = CoverPhoto(url=url, collection_id=collection_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('collections_detail', collection_id=collection_id)

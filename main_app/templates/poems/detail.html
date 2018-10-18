@@ -11,7 +11,7 @@
         <br>
         <p>{{ poem.date }}</p>
         <p>Source: {{ poem.source }}</p>
-    <a class='poemalter' href="{% url 'poems_update' poem.id %}">Edit</a>
+    <a class='poemalter' href="{% url 'poems_update' poem.id %}">Edit</a> | 
     <a class='poemalter' href="{% url 'poems_delete' poem.id %}">Delete</a>
 </div>
 <br>

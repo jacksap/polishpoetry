@@ -2,8 +2,20 @@
 {% block content %}
 <section class='poetbio'>
 <div class='bio' id='img-bio'>
-    <img src="https://media.newyorker.com/photos/59096be06552fa0be682fba7/master/w_727,c_limit/Szymborska.jpg">
 </div>
+    {% for photo in poet.photo_set.all %}
+        <img class="photo" src="{{photo.url}}">
+    {% empty %}
+        <div>No Photo Has Been Uploaded</div>
+    {% endfor %}
+    <br>
+    {% if poet.photo_set.all|length == 0 %}
+    <form action="{% url 'add_photo' poet.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+        {% csrf_token %}
+        <input type="file" name="photo-file">
+        <input type="submit" class="poetbtn" value="Upload Photo">
+    </form>
+    {% endif %}
 <div class='bio' id='bio'>
     <div class='biocard'>
         <h1>{{ poet.name }}</h1>
@@ -18,7 +30,7 @@
 <div class='collectionofworks'>
     <h2>Collection of Works</h2>
     {% for poem in poet.poem_set.all %}
-        <a class='poetworks' href="{% url 'poems_detail' poem.id %}">{{poem.name}}</a>
+        <p><a class='poetworks' href="{% url 'poems_detail' poem.id %}">{{poem.name}}</a></p>
     {% empty %}
         <a href="/poems/create">Add to their Poetry works.</a>
     {% endfor %}

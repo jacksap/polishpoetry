@@ -7,10 +7,10 @@
 <div class="poetmain">
 {% for poet in poets %}
 <a href="{% url 'poets_detail' poet.id %}">
-<div class='poetcard'>
+<div class='poetcard' style="background: url({{ poet.photo_set.first }}); max-width: 250px; min-height:250; background-repeat: no-repeat; background-size: cover;">
         <div>
-        <h3>{{ poet.name }}</h3>
-</div>
+                <h3>{{ poet.name }}</h3>
+        </div>
 </div>
 </a>
 {% endfor %}

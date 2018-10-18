@@ -5,6 +5,21 @@
 
 <div>
     <p>{{ collection.description }}</p>
+    {% for photo in collection.coverphoto_set.all %}
+    <img class="coverphoto" src="{{photo.url}}">
+    {% empty %}
+    <div>No Photo Has Been Uploaded For This Collection</div>
+    {% endfor %}
+    <br>
+    {% if collection.coverphoto_set.all|length == 0 %}
+    <form action="{% url 'add_cover_photo' collection.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+        {% csrf_token %}
+        <input type="file" name="photo-file">
+        <input type="submit" class="collectbtn" value="Upload Photo">
+    </form>
+    {% endif %}
+    <br>
+</div>
     <div>
         {% for poem in collection.poem_set.all %}
         <p><a class='collectionworks' href="{% url 'poems_detail' poem.id %}">{{poem.name}}</a></p>
@@ -12,8 +27,8 @@
         <a href="/poems">Add to this Poetry Collection.</a>
         {% endfor %}
     </div>
-    </div>
-        <a class='poemalter' href="{% url 'collections_update' collection.id %}">Edit</a>
-        <a class='poemalter' href="{% url 'collections_delete' collection.id %}">Delete</a>
-    </div>
+<br>
+<a class='poemalter' href="{% url 'collections_update' collection.id %}">Edit</a> |
+<a class='poemalter' href="{% url 'collections_delete' collection.id %}">Delete</a>
+</div>
 {% endblock %}

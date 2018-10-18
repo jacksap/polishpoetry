@@ -6,7 +6,7 @@
 
 {% for collection in collections %}
 <a href="{% url 'collections_detail' collection.id %}">
-<div class='collectioncard'>
+<div class='collectioncard' style="background: url({{ collection.coverphoto_set.first }}); width: 800px; min-height:250; background-repeat: no-repeat; background-size: cover;">
         <h3>{{ collection.name }}</h3>
 </div>
 </a>

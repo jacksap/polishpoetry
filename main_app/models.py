@@ -37,6 +37,9 @@ class Poem(models.Model):
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        ordering = ['name']
 
 class Comment(models.Model):
     content = models.TextField('COMMENT', max_length=500)
@@ -47,3 +50,17 @@ class Comment(models.Model):
         return f'Commment: {self.content}'
 
         # widget=TextInput(attrs={'placeholder':'Month Day, Year'})
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    poet = models.ForeignKey(Poet, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.url
+
+class CoverPhoto(models.Model):
+    url = models.CharField(max_length=200)
+    collection = models.ForeignKey(Collection, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.url
