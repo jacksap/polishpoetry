@@ -236,18 +236,32 @@ img.learning {
 .learntext {
     max-width:800px;
 }
-.homeclick a{
-    width: 315px;
+.homepic {
+    display: flex;
+    justify-content: space-between;
     text-align: center;
     font-size: 1.5em;
 }
-.homeclick {
-    display: flex;
-    justify-content: space-around;
-    
-}
-.homeclick a:hover {
+.homepic a:hover{
     opacity: 0.3;
     transition: .5s ease;
     background-color: black;
+}
+.homepic img{
+    width: 290px;
+    height: 360px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+.homepic span{
+    position: relative;
+    bottom: 30px;
+    font-weight: bolder;
+}
+.col1{
+    color: #0e0e0e;
+}
+.col3 {
+    color: #ffffff;
 }

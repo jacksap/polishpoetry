@@ -20,6 +20,7 @@
     {% endif %}
     <br>
 </div>
+<h3>Poems in Collection:</h3>
     <div>
         {% for poem in collection.poem_set.all %}
         <p><a class='collectionworks' href="{% url 'poems_detail' poem.id %}">{{poem.name}}</a></p>
