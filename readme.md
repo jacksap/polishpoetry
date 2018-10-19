@@ -10,7 +10,7 @@ This website is both education and interactive!
 
 ## Technologies Used
 
-This CRUD app was created with HTML5, CSS3, Python, Django, and ultimately deployed on Heroku.
+This CRUD app was created with HTML5, CSS3, Python, Django, AWS (for image storage/s3) and ultimately deployed on Heroku.
 
 ## Getting Started
 
