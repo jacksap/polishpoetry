@@ -14,7 +14,7 @@ This CRUD app was created with HTML5, CSS3, Python, Django, AWS (for image stora
 
 ## Getting Started
 
-The app is hosted on Heroku and is acccessible through this [Polish Poetry link](https://polishpoetry.herokuapp.com/). 
+The app is hosted on Heroku and is acccessible through this [Polish Poetry](https://polishpoetry.herokuapp.com/) link. 
 
 As stated above, the object of the projecy is to empty an app where the data was CRUD-able, these are all incorporated in many facets of my app.
 
